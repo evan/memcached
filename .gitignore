@@ -35,5 +35,6 @@ ext/libmemcached-*/tests/testplus
 ext/libmemcached-*/tests/udptest
 ext/rlibmemcached_wrap.c.in
 ext/mkmf.log
+ext/*.dSYM
 *.[1,3]
 .libs
