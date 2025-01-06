@@ -2379,32 +2379,11 @@ SWIG_From_unsigned_SS_int  (unsigned int value)
 
 VALUE rb_str_new_by_ref(char *ptr, long len)
 {
-#ifdef OBJSETUP
-    NEWOBJ(str, struct RString);
-    OBJSETUP(str, rb_cString, T_STRING);
-    #ifdef RSTRING_NOEMBED
-        /* Ruby 1.9 */
-        str->as.heap.ptr = ptr;
-        #if RUBY_API_VERSION_MAJOR < 3 || (RUBY_API_VERSION_MAJOR == 3 && RUBY_API_VERSION_MINOR < 3)
-            str->as.heap.len = len;
-        #else
-            // Ruby 3.3.0 moved the len field out of heap into toplevel RString
-            str->len = len;
-        #endif
-        str->as.heap.aux.capa = len + 1;
-        // Set STR_NOEMBED
-        FL_SET(str, FL_USER1);
-    #else
-        /* Ruby 1.8 */
-        str->ptr = ptr;
-        str->len = len;
-        str->aux.capa = 0;
-    #endif
-#else
-    /* Rubinius, JRuby */
+    // Previously there was an implementation for mruby to create a string without copying the ptr buffer.
+    // Some of the macros used in that implementation are not available as of Ruby 3.4 so we are using the
+    // copying implementation below in all cases. https://bugs.ruby-lang.org/issues/20265
     VALUE str = rb_str_new(ptr, len);
     free(ptr);
-#endif
     return (VALUE)str;
 }
 
