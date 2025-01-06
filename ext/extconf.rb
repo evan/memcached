@@ -39,7 +39,7 @@ def check_libmemcached
   $includes = " -I#{HERE}/include"
   $libraries = " -L#{HERE}/lib"
   $CFLAGS = "#{$includes} #{$libraries} #{$CFLAGS}"
-  $LDFLAGS = "-lsasl2 -lm #{$libraries} #{$LDFLAGS}"
+  $LDFLAGS = "-Wl,-no_warn_duplicate_libraries -lsasl2 -lm #{$libraries} #{$LDFLAGS}"
   $LIBPATH = ["#{HERE}/lib"]
   $DEFLIBPATH = [] unless SOLARIS_32
 
