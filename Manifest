@@ -183,6 +183,8 @@ ext/libmemcached-0.32/tests/t/memstat.test
 ext/libmemcached-0.32/tests/test.c
 ext/libmemcached-0.32/tests/test.h
 ext/libmemcached-0.32/tests/udp.c
+ext/rlibmemcached.bundle.dSYM/Contents/Info.plist
+ext/rlibmemcached.bundle.dSYM/Contents/Resources/Relocations/aarch64/rlibmemcached.bundle.yml
 ext/rlibmemcached.i
 ext/rlibmemcached_wrap.c
 lib/memcached.rb

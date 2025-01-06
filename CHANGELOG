@@ -1,6 +1,6 @@
-v1.8.2. Ruby 3.4 compatibility.
+v1.8.2.bc1. Ruby 3.4 compatibility.
 
-v1.8.1. Ruby 3.3 compatibility.
+v1.8.1.bc2. Ruby 3.3 compatibility.
 
 v1.8.0. Add support for multi-entry CAS (fbogsany).
 	Make rails client .delete method more consistent with other APIs
