@@ -1,7 +1,8 @@
 source 'https://rubygems.org'
 gemspec
 
-gem 'echoe', '>= 4.6.5'
+gem 'echoe', '>= 4.6.6'
+gem 'webrick', '~> 1.9'
 
 group :benchmark do
   gem "remix-stash", '~> 1.1.3'
