@@ -2,6 +2,11 @@ require 'echoe'
 
 ENV["GEM_CERTIFICATE_CHAIN"]="memcached.pem"
 
+# Patch for Echoe to work with Ruby 3.4
+if !defined?(Echoe::Config)
+  Echoe::Config = RbConfig
+end
+
 Echoe.new("memcached") do |p|
   p.author = "Evan Weaver"
   p.project = "evan"
