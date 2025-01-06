@@ -4,6 +4,7 @@ gemspec
 gem 'echoe', '>= 4.6.6'
 gem 'webrick', '~> 1.9'
 gem "ostruct", "~> 0.6.1"
+gem "test-unit", "~> 3.6"
 
 group :benchmark do
   gem "remix-stash", '~> 1.1.3'
