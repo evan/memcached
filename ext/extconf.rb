@@ -10,12 +10,14 @@ BUNDLE_PATH = Dir.glob("libmemcached-*").first
 
 SOLARIS_32 = RbConfig::CONFIG['target'] == "i386-pc-solaris2.10"
 BSD = RbConfig::CONFIG['host_os'].downcase =~ /bsd/
+MACOS = RbConfig::CONFIG['host_os'].downcase =~ /darwin/
 
 $CFLAGS = "#{RbConfig::CONFIG['CFLAGS']} #{$CFLAGS} -Wno-int-conversion".gsub("$(cflags)", "").gsub("-fno-common", "").gsub("-Werror=declaration-after-statement", "")
 $CFLAGS << " -std=gnu99" if SOLARIS_32
 $CFLAGS << " -I/usr/local/include" if BSD
 $EXTRA_CONF = " --disable-64bit" if SOLARIS_32
 $LDFLAGS = "#{RbConfig::CONFIG['LDFLAGS']} #{$LDFLAGS} -L#{RbConfig::CONFIG['libdir']}".gsub("$(ldflags)", "").gsub("-fno-common", "")
+$LDFLAGS << " -Wl,-no_warn_duplicate_libraries" if MACOS
 $CXXFLAGS = "#{RbConfig::CONFIG['CXXFLAGS']} -std=gnu++98"
 $CC = "CC=#{RbConfig::MAKEFILE_CONFIG["CC"].inspect}"
 
@@ -39,7 +41,8 @@ def check_libmemcached
   $includes = " -I#{HERE}/include"
   $libraries = " -L#{HERE}/lib"
   $CFLAGS = "#{$includes} #{$libraries} #{$CFLAGS}"
-  $LDFLAGS = "-Wl,-no_warn_duplicate_libraries -lsasl2 -lm #{$libraries} #{$LDFLAGS}"
+  
+  $LDFLAGS = "-lsasl2 -lm #{$libraries} #{$LDFLAGS}"
   $LIBPATH = ["#{HERE}/lib"]
   $DEFLIBPATH = [] unless SOLARIS_32
 
